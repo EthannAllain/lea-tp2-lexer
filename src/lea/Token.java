@@ -18,5 +18,7 @@ public sealed interface Token {
 	public record KeyWord	(String text)	implements Token {}
 	public record Operator	(String text)	implements Token {}
 	public record Number	(String text)	implements Token {}
+	public record Identifier(String text) implements Token {}
+	public record CharLiteral(String text) implements Token {}
 	
 }

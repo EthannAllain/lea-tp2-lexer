@@ -40,15 +40,22 @@ package lea;
 %}
 
 DIGIT = [0-9]
+OPERATOR = [\*\+-]
+IDENTIFIER = [A-Za-z_][A-Za-z0-9_]*
+CHARLITERAL = '(\\.|[^'\\\n])'
 
 %% // Règles lexicales
 
 "si"						{ return new Token.KeyWord(yytext()); }
 "sinon"						{ return new Token.KeyWord(yytext()); }
 {DIGIT}+					{ return new Token.Number(yytext()); }
+{OPERATOR}        { return new Token.Operator(yytext()); }
+{IDENTIFIER} { return new Token.Identifier(yytext()); }
+{CHARLITERAL} {return new Token.CharLiteral(yytext());}
 
  /* Suppression de caractères qui n'ont pas de rôle sémantique */
 \/\/.*						{ /* One-line comments */ }
 \/\*([^\*]|\*[^\/])*\*\/	{ /* Multi-line comments */ }
 
-[^]							{ System.out.print(Main.FG_GRAY + yytext() + Main.RESET); }
+[ \t\n]+        { System.out.print(Main.FG_GRAY + "·" + Main.RESET); }
+[^]							{ error("caractère inattendu "+ yytext());}
