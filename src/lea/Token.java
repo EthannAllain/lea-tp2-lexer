@@ -20,5 +20,5 @@ public sealed interface Token {
 	public record Number	(String text)	implements Token {}
 	public record Identifier(String text) implements Token {}
 	public record CharLiteral(String text) implements Token {}
-	
+	public record StringLiteral(String text) implements Token {}
 }

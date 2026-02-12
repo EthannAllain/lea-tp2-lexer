@@ -47,6 +47,7 @@ public class Main {
 			case Token.KeyWord t       -> BOLD + FG_BLUE + token.text() + RESET;
 			case Token.Number t        -> FG_CYAN + token.text() + RESET;
 			case Token.CharLiteral t   -> FG_MAGENTA + token.text() + RESET;
+			case Token.StringLiteral t   -> FG_RED + token.text() + RESET;
 			default                    -> token.text();
 			};
 			//output=token.toString(); // décommenter si votre terminal ne supporte pas l'affichage des couleurs
