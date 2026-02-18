@@ -43,6 +43,7 @@ DIGIT = [0-9]
 OPERATOR = [\*\+-]
 IDENTIFIER = [A-Za-z_][A-Za-z0-9_]*
 CHARLITERAL = '(\\.|[^'\\\n])'
+STRINGLITTERAL = \"([^\"\\n\\].|\\[^n].)*\"
 
 %% // Règles lexicales
 
@@ -52,10 +53,11 @@ CHARLITERAL = '(\\.|[^'\\\n])'
 {OPERATOR}        { return new Token.Operator(yytext()); }
 {IDENTIFIER} { return new Token.Identifier(yytext()); }
 {CHARLITERAL} {return new Token.CharLiteral(yytext());}
+{STRINGLITTERAL} {return new Token.StringLiteral(yytext());}
+[ \t\n]+        { System.out.print(Main.FG_GRAY + "·" + Main.RESET); }
 
  /* Suppression de caractères qui n'ont pas de rôle sémantique */
 \/\/.*						{ /* One-line comments */ }
 \/\*([^\*]|\*[^\/])*\*\/	{ /* Multi-line comments */ }
 
-[ \t\n]+        { System.out.print(Main.FG_GRAY + "·" + Main.RESET); }
 [^]							{ error("caractère inattendu "+ yytext());}
