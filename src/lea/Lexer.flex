@@ -43,12 +43,14 @@ DIGIT = [0-9]
 OPERATOR = [\*\+-]
 IDENTIFIER = [A-Za-z_][A-Za-z0-9_]*
 CHARLITERAL = '(\\.|[^'\\\n])'
-STRINGLITTERAL = \"([^\"\\n\\].|\\[^n].)*\"
+STRINGLITTERAL = \"([^\"\\]|\\[^n].+)*(\"|\\n)
 
 %% // Règles lexicales
 
 "si"						{ return new Token.KeyWord(yytext()); }
+"alors"						{ return new Token.KeyWord(yytext()); }
 "sinon"						{ return new Token.KeyWord(yytext()); }
+"fin si"						{ return new Token.KeyWord(yytext()); }
 {DIGIT}+					{ return new Token.Number(yytext()); }
 {OPERATOR}        { return new Token.Operator(yytext()); }
 {IDENTIFIER} { return new Token.Identifier(yytext()); }
